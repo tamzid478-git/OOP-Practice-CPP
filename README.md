@@ -8,5 +8,6 @@ This repository contains my practice codes and small projects related to Object-
 A console-based C++ application managing Buses and Cars. 
 **Concepts Used:** Classes, Objects, Inheritance, Polymorphism (Virtual Functions), and Dynamic Memory Allocation (Vectors).
 
----
-*More projects will be added soon...*
+### 2. [Library Management System](./Library_Management/)
+A console-based C++ application managing Books and Magazines in a library.
+**Concepts Used:** Method Overloading, Pure Virtual Functions, Inheritance, and Vectors.
