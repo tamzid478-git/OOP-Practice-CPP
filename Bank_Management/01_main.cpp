@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <unordered_map> // HashMap এর জন্য
+#include <unordered_map> 
 #include <stdexcept> 
 
 using namespace std;
