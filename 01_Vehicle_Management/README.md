@@ -1,40 +1,35 @@
-# University Transport Management System
+# 🚌 University Transport Management System (C++ OOP Project)
 
 ## Overview
 
-This project is a simple **Object-Oriented Programming (OOP)** based University Transport Management System implemented in **C++**. It demonstrates the use of:
+This project is a simple **University Transport Management System** developed using **C++** and **Object-Oriented Programming (OOP)** concepts.
 
-- Classes and Objects
-- Inheritance
-- Constructor Inheritance
-- Function Overriding (if implemented)
-- STL (`vector`)
-- Searching and Fare Calculation
+The system manages different types of university vehicles such as **Bus** and **Car**, stores them dynamically using the **STL vector**, allows searching vehicles by driver name, and calculates passenger fares.
 
 ---
 
 # Problem Statement
 
-Design a University Transport Management System that manages different types of university vehicles.
+Design a **University Transport Management System** using C++.
 
-The system should support a base class named **Vehicle** and two derived classes:
+The system should contain a base class named **Vehicles** and two derived classes:
 
 - Bus
 - Car
 
-The program should store all vehicles using STL and provide searching and fare calculation features.
+The project demonstrates the use of inheritance, constructor inheritance, runtime polymorphism, abstract classes, and STL.
 
 ---
 
 # Requirements
 
-## 1. Base Class: `Vehicle`
+## 1. Base Class : Vehicles
 
-Create a base class named `Vehicle` containing the following data members:
+Create a base class named **Vehicles** with the following attributes:
 
-- `vehicleID`
-- `driverName`
-- `capacity`
+- Vehicle ID
+- Driver Name
+- Capacity
 
 ### Constructor
 
@@ -42,10 +37,10 @@ Create a parameterized constructor to initialize all data members.
 
 ### Member Functions
 
-Implement the following functions:
+- `displayinfo()` → Displays vehicle information.
+- `fare_calculation(int passengers)` → Calculates fare.
 
-- `displayInfo()` → Displays vehicle information.
-- `calculateFare(int passengers)` → Calculates the total fare.
+Since fare policies are different for Bus and Car, this function is declared as a **Pure Virtual Function**.
 
 ---
 
@@ -53,79 +48,100 @@ Implement the following functions:
 
 ### Bus
 
-Additional Data Member:
+Additional Attribute
 
-- `routeNumber`
+- Route Number
 
-Fare Policy:
+Fare Policy
 
-- **50** taka per passenger
+```
+50 taka per passenger
+```
 
-Requirements:
+Override
 
-- Use the base class constructor to initialize inherited data members.
+- displayinfo()
+- fare_calculation()
 
 ---
 
 ### Car
 
-Additional Data Member:
+Additional Attribute
 
-- `carType`
+- Car Type
 
-Fare Policy:
+Fare Policy
 
-- **100** taka per passenger
+```
+100 taka per passenger
+```
 
-Requirements:
+Override
 
-- Use the base class constructor to initialize inherited data members.
+- displayinfo()
+- fare_calculation()
 
 ---
 
 ## 3. STL Usage
 
-Use an STL container (such as `vector`) to store all vehicles.
+Use
 
-The program should support:
+```cpp
+vector<Vehicles*>
+```
 
-- Adding buses and cars
-- Displaying all vehicle information
-- Calculating fare
+to store all vehicles dynamically.
+
+The system supports
+
+- Adding buses
+- Adding cars
+- Displaying all vehicles
 - Searching vehicles by driver name
+- Calculating passenger fare
 
 ---
 
-## 4. Functional Requirements
+# Functional Requirements
 
-The application should allow the user to:
+The user should be able to
 
 1. Add multiple buses and cars.
 2. Display all vehicle information.
-3. Search vehicles by driver name.
-4. Input the number of passengers.
-5. Calculate and display the total fare for each vehicle.
+3. Search vehicles using driver name.
+4. Enter passenger numbers.
+5. Calculate fare for every vehicle.
 
 ---
 
 # Sample Input
 
 ```
-Bus:
-101
+Number of Vehicles : 2
+
+Choice : 1
+
+Bus ID : 101
+Driver : Rahim
+Capacity : 40
+Route : 5
+
+Choice : 2
+
+Car ID : 201
+Driver : Karim
+Capacity : 4
+Company : Micro
+
+Search Driver
 Rahim
-40
-5
 
-Car:
-201
-Karim
-4
-Micro
+Passengers
 
-Passengers:
-Bus = 30
-Car = 3
+Bus : 30
+Car : 3
 ```
 
 ---
@@ -133,48 +149,287 @@ Car = 3
 # Expected Output
 
 ```
+Details of Bus
+
 Bus Fare : 1500
+
+Details of Car
+
 Car Fare : 300
 ```
 
 ---
 
-# Concepts Used
+# OOP Concepts Used
 
-- Object-Oriented Programming (OOP)
+- Classes & Objects
 - Encapsulation
 - Inheritance
+- Abstract Class
+- Pure Virtual Function
 - Constructor Inheritance
-- Parameterized Constructor
+- Function Overriding
+- Runtime Polymorphism
+- Dynamic Memory Allocation
+
+---
+
+# STL Concepts Used
+
+- vector
+- Dynamic Object Storage
+- Range-based for loop
+
+---
+
+# Code Explanation
+
+## 1. Vehicles Class (Base Class)
+
+```cpp
+class vehicles
+```
+
+This is the abstract base class of the project.
+
+### Data Members
+
+- vehicle_id
+- driver_name
+- capacity
+
+### Constructor
+
+```cpp
+vehicles(int vehicle_id,string driver_name,int capacity)
+```
+
+Initializes all common vehicle information.
+
+---
+
+### displayinfo()
+
+Displays common information of every vehicle.
+
+---
+
+### fare_calculation()
+
+```cpp
+virtual void fare_calculation(int passenger)=0;
+```
+
+This is a **Pure Virtual Function**.
+
+Therefore,
+
+- Vehicles becomes an **Abstract Class**.
+- Objects of Vehicles cannot be created.
+- Every derived class must implement this function.
+
+---
+
+# 2. Bus Class
+
+```cpp
+class bus : public vehicles
+```
+
+Derived from Vehicles.
+
+### Additional Data Member
+
+```
+route_number
+```
+
+### Constructor
+
+Uses the base class constructor to initialize inherited members.
+
+```cpp
+bus(...): vehicles(...)
+```
+
+### displayinfo()
+
+Displays complete bus information.
+
+### fare_calculation()
+
+```
+Bus Fare = Passenger × 50
+```
+
+---
+
+# 3. Car Class
+
+```cpp
+class car : public vehicles
+```
+
+Derived from Vehicles.
+
+### Additional Data Member
+
+```
+car_type
+```
+
+### Constructor
+
+Uses the base class constructor.
+
+```cpp
+car(...): vehicles(...)
+```
+
+### displayinfo()
+
+Displays complete car information.
+
+### fare_calculation()
+
+```
+Car Fare = Passenger × 100
+```
+
+---
+
+# 4. STL Container
+
+The program stores all vehicles inside
+
+```cpp
+vector<vehicles*>
+```
+
+Using pointers allows storing both Bus and Car objects inside the same vector.
+
+This is an example of **Runtime Polymorphism**.
+
+---
+
+# 5. Adding Vehicles
+
+The user selects
+
+```
+1 → Bus
+
+2 → Car
+```
+
+According to the choice, a new object is created dynamically using
+
+```cpp
+new bus(...)
+```
+
+or
+
+```cpp
+new car(...)
+```
+
+and stored in the vector.
+
+---
+
+# 6. Display All Vehicles
+
+The program traverses the vector
+
+```cpp
+for(auto x : v)
+```
+
+and calls
+
+```cpp
+x->displayinfo();
+```
+
+Because the function is virtual, the correct derived class function is executed automatically.
+
+---
+
+# 7. Search Vehicle
+
+The user enters a driver's name.
+
+The program compares
+
+```cpp
+x->driver_name
+```
+
+with the searched name.
+
+If matched,
+
+```
+displayinfo()
+```
+
+is called to display that vehicle.
+
+---
+
+# 8. Fare Calculation
+
+For every stored vehicle,
+
+The user enters passenger count.
+
+The program calls
+
+```cpp
+x->fare_calculation(passenger);
+```
+
+The correct fare function is selected automatically through runtime polymorphism.
+
+---
+
+# Fare Formula
+
+## Bus
+
+```
+Fare = Passenger × 50
+```
+
+## Car
+
+```
+Fare = Passenger × 100
+```
+
+---
+
+# Learning Outcomes
+
+After completing this project, you will understand
+
+- Constructor Inheritance
+- Abstract Classes
+- Pure Virtual Functions
+- Function Overriding
+- Runtime Polymorphism
+- Dynamic Memory Allocation
 - STL Vector
-- Searching
-- Function Design
-- Fare Calculation
+- Searching Objects
+- Designing a Real-world OOP Project
 
 ---
 
-# Formula
+# Technologies Used
 
-For Bus
-
-```
-Fare = Passengers × 50
-```
-
-For Car
-
-```
-Fare = Passengers × 100
-```
-
----
-
-# Learning Outcome
-
-After completing this project, you will understand:
-
-- How inheritance works in C++
-- How derived classes reuse constructors
-- How STL containers store objects
-- How to search objects by attribute
-- How to design a simple real-world management system using OOP
+- C++
+- Object-Oriented Programming (OOP)
+- STL (Vector)
+- Dynamic Memory Allocation
+- GCC / G++
